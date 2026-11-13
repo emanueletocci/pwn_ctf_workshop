@@ -10,21 +10,24 @@ print("Attack Man-in-the-Middle\n")
 p = 60238423281201603035618738734175500073376069852072170831139700677986577196703
 g = 2
 
-io = pwn.remote("ip","port")
+IP = "130.192.5.212"
+PORT = "8796"
+
+io = pwn.remote(IP, PORT)
 io.recvline()
 
 alice_pub = int(io.recvline().strip().decode().split(" ")[-1])
 bob_pub = int(io.recvline().strip().decode().split(" ")[-1])
 
 
-fake_public_key = ...
+fake_public_key = 1
 
 print(f"Franco sends the new public key: {fake_public_key}")
 
 
 io.sendlineafter(b"Insert the key to send to Alice: ",str(fake_public_key).encode())
 
-shared_secret_malicious = ...
+shared_secret_malicious = 1
 
 io.recvline()
 io.recvline()

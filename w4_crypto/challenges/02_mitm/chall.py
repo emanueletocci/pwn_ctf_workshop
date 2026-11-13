@@ -16,7 +16,7 @@ def server_simulation():
     
     print("[DH NETWORK SERVICE SIMULATION] Cryptographic connection between Alice and Bob ... [DH NETWORK SERVICE SIMULATION]")
 
-    # 1. prvate key generation
+    # 1. private key generation
     alice_private = random.randint(100000000, p-2)
     bob_private =   random.randint(100000000, p-2)
 
@@ -42,7 +42,8 @@ def server_simulation():
 
     print(f"Franco send {forged_to_alice} to Alice!")
 
-
+    # VULNERABILITY!!!
+    # The shared secret is computed using the forged public key instead of Bob's real public key
     shared_secret_alice = pow(forged_to_alice, alice_private, p)
 
     # print(shared_secret_alice) secret
@@ -51,7 +52,6 @@ def server_simulation():
     cipher = AES.new(aes_key, AES.MODE_ECB)
     ciphertext = cipher.encrypt(pad(FLAG, 16)) 
     
-
     print(f"Alice sends the encrypted flag")
     print(f"ciphertext = {ciphertext.hex()}")
 
